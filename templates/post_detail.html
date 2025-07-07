@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post['title'] }} - Flask Blog{% endblock %}
+
+{% block content %}
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary mb-3">← Back to Dashboard</a>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <h2>{{ post['title'] }}</h2>
+            <p class="text-muted">{{ post['created_at'] }}</p>
+            <hr>
+            <p>{{ post['content'] }}</p>
+        </div>
+    </div>
+{% endblock %}

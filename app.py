@@ -86,10 +86,24 @@ def logout():
 @app.route('/dashboard')
 @login_required
 def dashboard():
+    search_query = request.args.get('q')
+
     conn = get_db_connection()
-    posts = conn.execute("SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC", (current_user.id,)).fetchall()
+
+    if search_query:
+        posts = conn.execute(
+            "SELECT * FROM posts WHERE user_id = ? AND title LIKE ? ORDER BY created_at DESC",
+            (current_user.id, f'%{search_query}%')
+        ).fetchall()
+    else:
+        posts = conn.execute(
+            "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC",
+            (current_user.id,)
+        ).fetchall()
+
     conn.close()
-    return render_template('index.html', posts=posts)
+    return render_template('index.html', posts=posts, search_query=search_query)
+
 
 # Create new post
 @app.route('/create', methods=['GET', 'POST'])
@@ -132,6 +146,18 @@ def edit_post(post_id):
     conn.close()
     return render_template('edit_post.html', post=post)
 
+@app.route('/post/<int:post_id>')
+@login_required
+def post_detail(post_id):
+    conn = get_db_connection()
+    post = conn.execute("SELECT * FROM posts WHERE id = ? AND user_id = ?", (post_id, current_user.id)).fetchone()
+    conn.close()
+
+    if not post:
+        flash("Post not found.")
+        return redirect(url_for('dashboard'))
+
+    return render_template('post_detail.html', post=post)
 
 @app.route('/')
 def home():

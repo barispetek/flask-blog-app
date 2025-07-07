@@ -1,32 +1,33 @@
 # 📝 Flask Blog App
 
-A simple yet functional blog application built with Flask.
-
-Users can register, log in, and manage their own posts — including creating, editing, and deleting blog entries.  
-This project is the first version (v1) of a series of progressively more advanced blog applications.
+A clean and functional multi-user blog platform built with Flask.  
+Users can register, log in, and manage their personal posts through a minimal, Bootstrap-styled interface.
 
 ---
 
 ## 🚀 Features
 
-- User authentication (register, login, logout)
-- Create, read, update, and delete blog posts
-- Posts tied to specific user accounts
-- Flash message feedback system
-- Responsive UI using Bootstrap
-- Custom CSS styling
-- Clean Flask file structure
+- 🔐 **Authentication:** Register, login, logout with secure password hashing
+- 🧾 **CRUD for Blog Posts:** Create, edit, delete posts tied to user accounts
+- 💡 **Flash Messages:** User-friendly feedback throughout the app
+- 🎨 **Responsive UI:** Clean design with Bootstrap 5 and custom CSS
+- 🧱 **Jinja2 Templates:** DRY structure using a `base.html` layout
+- 🔍 **Search Functionality:** Search posts by title within user’s dashboard
+
+---
+
+## 📁 Folder Structure
 
 ---
 
 ## 🛠️ Tech Stack
 
-- Python
+- Python 3.x
 - Flask
-- SQLite
+- SQLite (for development)
 - Flask-Login
-- Jinja2 Templates
 - Bootstrap 5
+- Jinja2
 
 ---
 
@@ -39,12 +40,12 @@ cd flask-blog-app
 
 # (Optional) Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate   # On Windows: venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Initialize the database
+# Initialize database
 python init_db.py
 
 # Run the app
