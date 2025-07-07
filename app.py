@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash 
 from flask_login import LoginManager, login_user, login_required, logout_user, UserMixin, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
+from flask import jsonify
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
@@ -162,6 +163,34 @@ def post_detail(post_id):
 @app.route('/')
 def home():
     return redirect(url_for('login'))
+
+@app.route('/api/posts')
+@login_required
+def api_posts():
+    conn = get_db_connection()
+    posts = conn.execute(
+        "SELECT id, title, content, created_at FROM posts WHERE user_id = ? ORDER BY created_at DESC",
+        (current_user.id,)
+    ).fetchall()
+    conn.close()
+
+    return jsonify([dict(post) for post in posts])
+
+@app.route('/api/post/<int:post_id>')
+@login_required
+def api_post_detail(post_id):
+    conn = get_db_connection()
+    post = conn.execute(
+        "SELECT id, title, content, created_at FROM posts WHERE id = ? AND user_id = ?",
+        (post_id, current_user.id)
+    ).fetchone()
+    conn.close()
+
+    if post is None:
+        return jsonify({"error": "Post not found"}), 404
+
+    return jsonify(dict(post))
+
 
 
 if __name__ == '__main__':
