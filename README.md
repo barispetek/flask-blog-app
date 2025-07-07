@@ -16,10 +16,6 @@ Users can register, log in, and manage their personal posts through a minimal, B
 
 ---
 
-## 📁 Folder Structure
-
----
-
 ## 🛠️ Tech Stack
 
 - Python 3.x
