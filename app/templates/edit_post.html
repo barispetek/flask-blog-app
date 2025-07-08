@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Post - Flask Blog{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-secondary mb-3">← Back to Dashboard</a>
+
+<div class="card shadow">
+    <div class="card-body">
+        <h2 class="text-center mb-4">✏️ Edit Post</h2>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-success">{{ messages[0] }}</div>
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.title.label(class="form-label") }}
+                {{ form.title(class="form-control", placeholder="Post title") }}
+                {% for error in form.title.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.content.label(class="form-label") }}
+                {{ form.content(class="form-control", placeholder="Edit your content...", rows=6) }}
+                {% for error in form.content.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            {{ form.submit(class="btn btn-success w-100") }}
+        </form>
+    </div>
+</div>
+{% endblock %}

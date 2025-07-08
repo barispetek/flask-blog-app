@@ -1,3 +1,11 @@
-blog.db
-__pycache__/
 .env
+__pycache__/
+instance/
+.env.*
+*.pyc
+*.pyo
+*.db
+.DS_Store
+.vscode/
+.idea/
+*.log
