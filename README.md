@@ -43,7 +43,6 @@ source .venv/Scripts/activate  # Windows
 # Install dependencies
 pip install -r requirements.txt
 
-# Configure Environment
 # Create a .env file in the root directory
 SECRET_KEY=your-secret-key
 DEBUG=True
