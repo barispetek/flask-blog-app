@@ -7,6 +7,7 @@ Users can register, log in, and manage their personal blog posts via a simple an
 
 ## 🚀 Features
 
+<<<<<<< HEAD
 - 🔐 **User Authentication:** Register, login, logout with hashed passwords
 - 📝 **Post Management:** Create, edit, delete, view, and search posts
 - 🎨 **UI with Bootstrap 5:** Clean responsive design
@@ -14,11 +15,21 @@ Users can register, log in, and manage their personal blog posts via a simple an
 - ⚡ **Flash Messages:** Helpful feedback throughout the app
 - 🧱 **Blueprint Structure:** Organized codebase
 - 💾 **PostgreSQL Database:** Production-ready setup
+=======
+- 🔐 **Authentication:** Register, login, logout with secure password hashing  
+- 🧾 **CRUD for Blog Posts:** Create, edit, delete posts tied to user accounts  
+- 💡 **Flash Messages:** User-friendly feedback throughout the app  
+- 🎨 **Responsive UI:** Clean design with Bootstrap 5 and custom CSS  
+- 🧱 **Jinja2 Templates:** DRY structure using a `base.html` layout  
+- 🔍 **Search Functionality:** Search posts by title within user’s dashboard  
+- 📡 **RESTful API (V3):** JSON-based API with authentication
+>>>>>>> origin/main
 
 ---
 
 ## 🛠️ Tech Stack
 
+<<<<<<< HEAD
 - Python 3.11+
 - Flask
 - Flask-Login
@@ -26,6 +37,14 @@ Users can register, log in, and manage their personal blog posts via a simple an
 - SQLAlchemy
 - PostgreSQL
 - Bootstrap 5
+=======
+- Python 3.x  
+- Flask  
+- SQLite (for development)  
+- Flask-Login  
+- Bootstrap 5  
+- Jinja2
+>>>>>>> origin/main
 
 ---
 
