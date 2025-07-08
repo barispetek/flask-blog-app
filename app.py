@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, login_required, logout_user, UserMixin, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
-from flask import jsonify
+from flask import jsonify, request
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
@@ -190,6 +190,79 @@ def api_post_detail(post_id):
         return jsonify({"error": "Post not found"}), 404
 
     return jsonify(dict(post))
+
+@app.route('/api/posts', methods=['POST'])
+@login_required
+def api_create_post():
+    data = request.get_json()
+
+    # Access control
+    if not data or 'title' not in data or 'content' not in data:
+        return jsonify({'error': 'Title and content required'}), 400
+
+    title = data['title']
+    content = data['content']
+
+    conn = get_db_connection()
+    conn.execute(
+        "INSERT INTO posts (title, content, user_id) VALUES (?, ?, ?)",
+        (title, content, current_user.id)
+    )
+    conn.commit()
+    conn.close()
+
+    return jsonify({'message': 'Post created successfully'}), 201
+
+@app.route('/api/post/<int:post_id>', methods=['PUT'])
+@login_required
+def api_update_post(post_id):
+    data = request.get_json()
+
+    if not data or 'title' not in data or 'content' not in data:
+        return jsonify({'error': 'Title and content required'}), 400
+
+    title = data['title']
+    content = data['content']
+
+    conn = get_db_connection()
+
+    post = conn.execute(
+        "SELECT * FROM posts WHERE id = ? AND user_id = ?",
+        (post_id, current_user.id)
+    ).fetchone()
+
+    if not post:
+        conn.close()
+        return jsonify({'error': 'Post not found'}), 404
+
+    conn.execute(
+        "UPDATE posts SET title = ?, content = ? WHERE id = ?",
+        (title, content, post_id)
+    )
+    conn.commit()
+    conn.close()
+
+    return jsonify({'message': 'Post updated successfully'})
+
+@app.route('/api/post/<int:post_id>', methods=['DELETE'])
+@login_required
+def delete_post_api(post_id):
+    conn = get_db_connection()
+    post = conn.execute(
+        "SELECT * FROM posts WHERE id = ? AND user_id = ?",
+        (post_id, current_user.id)
+    ).fetchone()
+
+    if post is None:
+        conn.close()
+        return jsonify({"error": "Post not found or unauthorized"}), 404
+
+    conn.execute("DELETE FROM posts WHERE id = ?", (post_id,))
+    conn.commit()
+    conn.close()
+
+    return jsonify({"message": "Post deleted successfully"})
+
 
 
 
