@@ -31,6 +31,7 @@ It includes user authentication, post creation/editing/deletion, and a clean Boo
 - PostgreSQL
 - Docker & Docker Compose
 - HTML / Jinja2 / Bootstrap 5
+- RESTful API 
 
 ---
 
