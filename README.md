@@ -37,10 +37,12 @@ It includes user authentication, post creation/editing/deletion, and a clean Boo
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
+git clone https://github.com/barispetek/flask-blog-app.git
 cd flask-blog-app
 
-#Set-up .env
+# Create a .env file in the project root directory with the following content:
+# (Change values as needed)
+
 SECRET_KEY=your-secret-key
 DEBUG=True
 
@@ -50,8 +52,9 @@ POSTGRES_PASSWORD=yourpassword
 POSTGRES_HOST=db
 POSTGRES_PORT=5432
 
-#Build & run with Docker
+# Build and run the containers
 docker-compose up --build
 
-#Create database tables
+# After containers are running, create the database tables
 docker-compose exec web python create_table.py
+
