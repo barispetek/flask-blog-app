@@ -13,7 +13,7 @@ class Config:
     POSTGRES_DB = os.getenv("POSTGRES_DB", "flask_blog")
     POSTGRES_USER = os.getenv("POSTGRES_USER", "baris")
     POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "yourpassword")
-    POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
+    POSTGRES_HOST = os.getenv("POSTGRES_HOST", "db")
     POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 
     SQLALCHEMY_DATABASE_URI = (

@@ -1,7 +1,6 @@
 Flask
-Flask-Login
 Flask-WTF
 Flask-SQLAlchemy
-email-validator
-psycopg2-binary
+Flask-Login
 python-dotenv
+psycopg2-binary

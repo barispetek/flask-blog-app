@@ -1,63 +1,57 @@
 # 📝 Flask Blog App
+[![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-2.3.x-lightgrey.svg)](https://flask.palletsprojects.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-🐳-blue)](https://www.docker.com/)
 
-A clean and functional multi-user blog platform built with Flask.  
-Users can register, log in, and manage their personal blog posts via a simple and responsive UI.
+A simple yet professional blog application built with Flask, PostgreSQL, and Docker.  
+It includes user authentication, post creation/editing/deletion, and a clean Bootstrap-based UI.
 
 ---
 
 ## 🚀 Features
 
-- 🔐 **User Authentication:** Register, login, logout with hashed passwords
-- 📝 **Post Management:** Create, edit, delete, view, and search posts
-- 🎨 **UI with Bootstrap 5:** Clean responsive design
-- 🧠 **Form Validation:** With Flask-WTF
-- ⚡ **Flash Messages:** Helpful feedback throughout the app
-- 🧱 **Blueprint Structure:** Organized codebase
-- 💾 **PostgreSQL Database:** Production-ready setup
+- User registration & login system (Flask-Login, hashed passwords)
+- Post creation, editing, and deletion
+- PostgreSQL database with SQLAlchemy ORM
+- WTForms for form handling and validation
+- Dockerized setup with separate services for `web` and `db`
+- Environment variables via `.env`
+- Clean and responsive Bootstrap 5 interface
 
 ---
 
-## 🛠️ Tech Stack
+## ⚙️ Technologies
 
-- Python 3.11+
+- Python 3.11
 - Flask
-- Flask-Login
 - Flask-WTF
-- SQLAlchemy
+- Flask-Login
+- Flask-SQLAlchemy
 - PostgreSQL
-- Bootstrap 5
+- Docker & Docker Compose
+- HTML / Jinja2 / Bootstrap 5
 
 ---
 
-## ⚙️ Installation
+## 📦 Installation
 
 ```bash
-git clone https://github.com/barispetek/flask-blog-app.git
+git clone https://github.com/<your-username>/<repo-name>.git
 cd flask-blog-app
 
-# (Optional) Create virtual environment
-python -m venv .venv
-source .venv/Scripts/activate  # Windows
-# source .venv/bin/activate    # macOS/Linux
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Create a .env file in the root directory
+#Set-up .env
 SECRET_KEY=your-secret-key
 DEBUG=True
+
 POSTGRES_DB=flask_blog
-POSTGRES_USER=your_postgres_user
-POSTGRES_PASSWORD=your_postgres_password
-POSTGRES_HOST=localhost
+POSTGRES_USER=yourusername
+POSTGRES_PASSWORD=yourpassword
+POSTGRES_HOST=db
 POSTGRES_PORT=5432
 
-#Initialize Database Tables
-python create_table.py
+#Build & run with Docker
+docker-compose up --build
 
-# Run the app
-python app.py
-
-Then visit
-👉 http://127.0.0.1:5000
-
+#Create database tables
+docker-compose exec web python create_table.py

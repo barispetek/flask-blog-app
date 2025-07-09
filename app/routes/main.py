@@ -14,7 +14,10 @@ def home():
 @main_bp.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm()
+
     if form.validate_on_submit():
+        print("✅ Form validated")
+
         existing_user = User.query.filter_by(username=form.username.data).first()
         if existing_user:
             flash("Username already exists.", "error")
@@ -27,8 +30,12 @@ def register():
 
         flash("Registration successful. You can now log in.", "success")
         return redirect(url_for("main.login"))
+    else:
+        print("❌ Form did NOT validate")
+        print(form.errors)
 
     return render_template("register.html", form=form)
+
 
 @main_bp.route("/login", methods=["GET", "POST"])
 def login():
